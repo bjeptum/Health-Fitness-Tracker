@@ -2,9 +2,9 @@
 const express =  require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const authRoutes = require(".routes/authRoutes");
-const exerciseRoutes = require(".routes/exerciseRoutes");
-const goalRoutes = require(".routes/goalRoutes");
+const authRoutes = require("./routes/authRoutes");
+const exerciseRoutes = require("./routes/exerciseRoutes");
+const goalRoutes = require("./routes/goalRoutes");
 require('dontenv').config()
 
 const app = express();
