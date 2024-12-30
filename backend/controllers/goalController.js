@@ -1,2 +1,2 @@
-// Logic for handling API requets
+// Logic for handling API requests
 // Goal related CRUD 

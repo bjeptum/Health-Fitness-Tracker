@@ -7,13 +7,13 @@ const generateToken = (userId) => {
     return jwt.sign( {id: userId }, process.env.JWT_SECRET, {expiresIn: '1h'});
 };
 
-exports,login = async (req, res) => {
+exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
         const user = await User.findOne({ email });
         if (!user || !(await user.matchPassword(password))) {
-            return res.satus(401).json( { message:'Invalid email or password' });
+            return res.status(401).json( { message:'Invalid email or password' });
         }
 
         res.json({
@@ -22,6 +22,18 @@ exports,login = async (req, res) => {
             email: user.email,
             token: generateToken(user._id),
         });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+exports.getProfile = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.json(user);
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }

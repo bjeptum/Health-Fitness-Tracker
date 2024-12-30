@@ -1,11 +1,11 @@
 // Main entry point for Express
-const express =  require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-const authRoutes = require("./routes/authRoutes");
-const exerciseRoutes = require("./routes/exerciseRoutes");
-const goalRoutes = require("./routes/goalRoutes");
-require('dontenv').config()
+const express =  require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const authRoutes = require('./routes/authRoutes');
+const exerciseRoutes = require('./routes/exerciseRoutes');
+const goalRoutes = require('./routes/goalRoutes');
+require('dotenv').config();
 
 const app = express();
 
@@ -19,7 +19,7 @@ connect_DB();
 
 // API Routes
 app.use('/api/auth', authRoutes);
-app.use('api/exercisea', exerciseRoutes);
+app.use('api/exercises', exerciseRoutes);
 app.use('api/goals', goalRoutes);
 
 // Initial Message Output on server
