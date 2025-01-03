@@ -1,6 +1,7 @@
 // Main entry point for Express
 const express =  require('express');
 const cors = require('cors');
+const connect_DB = require('./config/db');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 const exerciseRoutes = require('./routes/exerciseRoutes');
@@ -14,13 +15,12 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-const connect_DB = require('./config/db');
 connect_DB();
 
 // API Routes
 app.use('/api/auth', authRoutes);
-app.use('api/exercises', exerciseRoutes);
-app.use('api/goals', goalRoutes);
+app.use('/api/exercise', exerciseRoutes);
+app.use('/api/goals', goalRoutes);
 
 // Initial Message Output on server
 app.get("/", (req, res) => {
@@ -28,8 +28,9 @@ app.get("/", (req, res) => {
 });
 
 // Start server
-const port = process.env.PORT || 8080;
+const config = require('./config/config');
+const port = config.app.port;
 
 app.listen(port, () => {
-    console.log('Listening on port ${PORT}');
+    console.log(`Listening on port ${port}`);
 });
