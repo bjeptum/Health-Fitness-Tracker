@@ -1,16 +1,25 @@
 // Logic for handling API requests
 // Goal related CRUD 
+const { goalValidationSchema } = require('../utils/validators');
 const Goal = require('../models/goal');
 
 exports.createGoal = async (req, res) => {
     const { title, description, targetDate } = req.body;
 
     try {
+        const { error } = goalValidationSchema.validate(req.body, { abortEarly: false });
+        if (error) {
+            return res.status(400).json({ message: 'Validation failed', details: error.details });
+        }
+
+        const { goalType, targetValue, currentValue, deadline } = req.body;
+
         const goal = new Goal({
             user: req.user._id,
-            title,
-            description,
-            targetDate,
+            goalType,
+            targetValue,
+            currentValue,
+            deadline,
         });
 
         const savedGoal = await goal.save();

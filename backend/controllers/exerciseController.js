@@ -1,14 +1,22 @@
 // Logic for handling API requests
 // Exercise log CRUD operations
-const Exercise = ('../models/exercise');
+const { exerciseValidationSchema } = require('../utils/validators');
+const Exercise = require ('../models/exercise');
 
 exports.createExercise = async (req, res) => {
     const { name, sets, reps, weight, date } = req.body;
 
     try {
+        const { error } = exerciseValidationSchema.validate(req.body, { abortEarly: false });
+        if (error) {
+            return res.status(400).json({ message: 'Validation failed', details: error.details });
+        }
+        const { name, type, sets, reps, weight, date } = req.body;
+
         const exercise = new Exercise({
             user: req.user._id,
             name,
+            type,
             sets,
             reps,
             weight,
