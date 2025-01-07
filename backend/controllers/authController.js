@@ -3,12 +3,18 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const { userValidationSchema } = require('../utils/validators');
 
 const generateToken = (userId) => {
     return jwt.sign( {id: userId }, process.env.JWT_SECRET, {expiresIn: '1h'});
 };
 
 exports.register = async (req, res) => {
+    const { error } = userValidationSchema.validate(req.body, { abortEarly: false});
+    if (error) {
+        return res.status(400).json({message: 'Validation failed', details: error.details });
+    }
+
     const { name, email, password } = req.body;
 
     try {
