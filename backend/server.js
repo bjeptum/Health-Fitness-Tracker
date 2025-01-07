@@ -1,4 +1,5 @@
 // Main entry point for Express
+require('dotenv').config();
 const express =  require('express');
 const cors = require('cors');
 const connect_DB = require('./config/db');
@@ -6,12 +7,12 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 const exerciseRoutes = require('./routes/exerciseRoutes');
 const goalRoutes = require('./routes/goalRoutes');
-require('dotenv').config();
+const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.json());
 
 // MongoDB Connection
@@ -26,6 +27,9 @@ app.use('/api/goals', goalRoutes);
 app.get("/", (req, res) => {
     res.send("Hello, Welcome to Health and Fitness!");
 });
+
+// Error Handling Middleware
+// app.use(errorHandler);
 
 // Start server
 const config = require('./config/config');

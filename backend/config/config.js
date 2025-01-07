@@ -8,16 +8,15 @@ const config = {
         env: process.env.NODE_ENV || 'development',
     },
 
+    db: {
+        uri: process.env.MONGO_URI || 'mongodb://localhost:27017/fitness-tracker',
+    },
+
     // JWT settings
     jwt: {
         secret: process.env.JWT_SECRET || 'your_jwt_secret',
         expiresIn: process.env.JWT_EXPIRES_IN || '1h',
     },
-
-    // API settings
-    api: {
-        baseURL: process.env.API_BASE_URL || 'http://localhost:8000/api',
-    }
 };
 
 module.exports = config;
