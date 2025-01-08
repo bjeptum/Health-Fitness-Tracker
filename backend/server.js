@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 });
 
 // Error Handling Middleware
-// app.use(errorHandler);
+app.use(errorHandler);
 
 // Start server
 const config = require('./config/config');
