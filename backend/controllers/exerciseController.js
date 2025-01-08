@@ -70,9 +70,10 @@ exports.deleteExercise = async (req, res) => {
             return res.status(401).json({ message: 'Not authorized' });
         }
 
-        await exercise.remove();
+        await exercise.deleteOne();
         res.json({ message: 'Exercise removed' });
     } catch (error) {
+        console.error('Error deleting exercis:', error);
         res.status(500).json({ message: 'Server error' });
     }
 };

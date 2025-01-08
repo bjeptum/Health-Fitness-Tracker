@@ -69,9 +69,10 @@ exports.deleteGoal = async (req, res) => {
             return res.status(401).json({ message: 'Not authorized' });
         }
 
-        await goal.remove();
+        await goal.deleteOne();
         res.json({ message: 'Goal removed' });
     } catch (error) {
+        console.error('Error deleling goal:', error);
         res.status(500).json({ message: 'Server error' });
     }
 };
