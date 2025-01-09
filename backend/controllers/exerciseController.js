@@ -73,7 +73,7 @@ exports.deleteExercise = async (req, res) => {
         await exercise.deleteOne();
         res.json({ message: 'Exercise removed' });
     } catch (error) {
-        console.error('Error deleting exercis:', error);
+        console.error('Error deleting exercise:', error);
         res.status(500).json({ message: 'Server error' });
     }
 };
