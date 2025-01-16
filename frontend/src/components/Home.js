@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../index.css';
 
@@ -12,21 +12,20 @@ function Home() {
     useEffect(() => {
         const fetchData = async () => {
             const token = localStorage.getItem('token');
+
             if (!token) {
                 navigate('/login');
                 return;
             }
             try {
                 const headers = { Authorization: `Bearer ${token}` };
-
-                const exerciseResponse = await axios.get('http://localhost:8000/api/exercise', { headers });
-                console.log("Exercises:", exerciseResponse.data);
-                setExercises(exerciseResponse.data);
-
                 const goalsResponse = await axios.get('http://localhost:8000/api/goals', { headers });
+                const exerciseResponse = await axios.get('http://localhost:8000/api/exercise', { headers });
+                setExercises(exerciseResponse.data);
                 setGoals(goalsResponse.data);
             } catch (err) {
-                setError('Failed to fetch data. Please try again.');
+                console.error('Error fetching data:', err);
+                setError('Failed to fetch data. Please try again later.');
             }
         };
         fetchData();
@@ -39,52 +38,50 @@ function Home() {
 
     return (
         <div className="home">
-            <div className="header">
-                <h1>Welcome to Your Fitness Tracker</h1>
-                <button className="logout-button" onClick={handleLogout}>Logout</button>
+            <header className="navbar">
+                <ul>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/add-exercise">Add Exercise</Link></li>
+                    <li><Link to="/add-goal">Add Goal</Link></li>
+                    <li><Link to="/goals">Goals</Link></li>
+                    <li><Link to="/login">Login</Link></li>
+                    {localStorage.getItem('token') && (
+                        <li><button onClick={handleLogout} className="logout-button">Logout</button></li>
+                    )}
+                </ul>
+            </header>
+
+            <div className="content">
+                <h1>Your Dashboard</h1>
+
+                {error && <p className="error">{error}</p>}
+
+                <div className="section">
+                    <h2>Goals</h2>
+                    <ul>
+                        {goals.length > 0 ? (
+                            goals.map(goal => (
+                                <li key={goal._id}>{goal.goalType} - {goal.targetValue}</li>
+                            ))
+                        ) : (
+                            <li>No goals set yet.</li>
+                        )}
+                    </ul>
+                </div>
+
+                <div className="section">
+                    <h2>Exercises</h2>
+                    <ul>
+                        {exercises.length > 0 ? (
+                            exercises.map(exercise => (
+                                <li key={exercise._id}>{exercise.name} - {exercise.type}</li>
+                            ))
+                        ) : (
+                            <li>No exercises available yet.</li>
+                        )}
+                    </ul>
+                </div>
             </div>
-
-            {error && <p className="error">{error}</p>}
-
-            <section className="data-section">
-                <h2>Your Exercises</h2>
-                <div className="data-list">
-                    {exercises.length > 0 ? (
-                        exercises.map((exercise) => (
-                            <div key={exercise._id} className="data-item">
-                                <h3>{exercise.name}</h3>
-                                <p>Type: {exercise.type}</p>
-                                <p>Sets: {exercise.sets}</p>
-                                <p>Reps: {exercise.reps}</p>
-                                {exercise.weight && <p>Weight: {exercise.weight} kg</p>}
-                                <p>Date: {exercise.date ? new Date(exercise.date).toLocaleDateString() : 'No Date Available'}</p>
-                            </div>
-                        ))
-                    ) : (
-                        <p>No exercises logged yet.</p>
-                    )}
-                </div>
-                <button className="action-button" onClick={() => navigate('/add-exercise')}>Add Exercise</button>
-            </section>
-
-            <section className="data-section">
-                <h2>Your Goals</h2>
-                <div className="data-list">
-                    {goals.length > 0 ? (
-                        goals.map((goal) => (
-                            <div key={goal._id} className="data-item">
-                                <h3>{goal.goalType}</h3>
-                                <p>Target Value: {goal.targetValue}</p>
-                                <p>Current Value: {goal.currentValue || 0}</p>
-                                {goal.deadline && <p>Deadline: {new Date(goal.deadline).toLocaleDateString()}</p>}
-                            </div>
-                        ))
-                    ) : (
-                        <p>No goals set yet.</p>
-                    )}
-                </div>
-                <button className="action-button" onClick={() => navigate('/add-goal')}>Add Goal</button>
-            </section>
         </div>
     );
 }

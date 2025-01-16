@@ -1,7 +1,7 @@
-// App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
+import AboutUs from './components/AboutUs';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -16,7 +16,8 @@ const App = () => {
         <Router>
             <Routes>
                 <Route path="/" element={<LandingPage />} />
-                <Route path="/" element={token ? <Home /> : <Navigate to="/login" />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/home" element={token ? <Home /> : <Navigate to="/login" />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/goals" element={token ? <Goals /> : <Navigate to="/login" />} />

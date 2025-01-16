@@ -13,7 +13,7 @@ function Login() {
         try {
             const { data } = await axios.post('http://localhost:8000/api/auth/login', { email, password });
             localStorage.setItem('token', data.token);
-            navigate('/'); // Redirect to Home
+            navigate('/home'); // Redirect to Home
         } catch (err) {
             setError('Invalid email or password');
         }
