@@ -28,6 +28,10 @@ const exerciseSchema = new mongoose.Schema({
         type: Number,
         required: false,
     },
+    caloriesBurned: {
+        type: Number,
+        required: false,
+    },
     date: {
         type: Date,
         default: Date.now
