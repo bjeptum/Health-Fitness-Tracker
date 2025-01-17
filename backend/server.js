@@ -8,6 +8,8 @@ const authRoutes = require('./routes/authRoutes');
 const exerciseRoutes = require('./routes/exerciseRoutes');
 const goalRoutes = require('./routes/goalRoutes');
 const errorHandler = require('./middleware/errorHandler');
+const workoutPlanRoutes = require('./routes/workoutPlanRoutes');
+const progressRoutes = require('./routes/progressRoutes');
 
 const app = express();
 
@@ -22,6 +24,9 @@ connect_DB();
 app.use('/api/auth', authRoutes);
 app.use('/api/exercise', exerciseRoutes);
 app.use('/api/goals', goalRoutes);
+app.use('/api/workout-plans', workoutPlanRoutes);
+app.use('/api/progress', progressRoutes);
+
 
 // Initial Message Output on server
 app.get("/", (req, res) => {
