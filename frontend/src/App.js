@@ -8,6 +8,10 @@ import Register from './components/Register';
 import Goals from './components/Goals';
 import ExerciseForm from './components/ExerciseForm';
 import GoalForm from './components/GoalForm';
+import WorkoutPlans from './components/WorkoutPlans';
+import WorkoutPage from './components/WorkoutPage';
+import ScheduleWorkout from './components/ScheduleWorkout';
+import TrackProgress from './components/TrackProgress';
 
 const App = () => {
     const token = localStorage.getItem('token');
@@ -23,6 +27,10 @@ const App = () => {
                 <Route path="/goals" element={token ? <Goals /> : <Navigate to="/login" />} />
                 <Route path="/add-exercise" element={token ? <ExerciseForm /> : <Navigate to="/login" />} />
                 <Route path="/add-goal" element={token ? <GoalForm /> : <Navigate to="/login" />} />
+                <Route path="/workout-plans" element={<WorkoutPlans />} />
+                <Route path="/workout-plans/:id" element={<WorkoutPage />} />
+                <Route path="/workout-plans/:id/schedule" element={<ScheduleWorkout />} />
+                <Route path="/progress" element={<TrackProgress />} />
             </Routes>
         </Router>
     );
