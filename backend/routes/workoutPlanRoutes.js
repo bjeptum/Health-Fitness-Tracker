@@ -21,4 +21,5 @@ router.route('/:id')
 
 router.route('/:id/schedule').put(protect, scheduleWorkout);
 
+
 module.exports = router;

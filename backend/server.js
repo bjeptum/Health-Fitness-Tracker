@@ -9,6 +9,7 @@ const exerciseRoutes = require('./routes/exerciseRoutes');
 const goalRoutes = require('./routes/goalRoutes');
 const errorHandler = require('./middleware/errorHandler');
 const workoutPlanRoutes = require('./routes/workoutPlanRoutes');
+const mockDataRoutes = require('./routes/mockDataRoutes');
 const progressRoutes = require('./routes/progressRoutes');
 
 const app = express();
@@ -25,7 +26,9 @@ app.use('/api/auth', authRoutes);
 app.use('/api/exercise', exerciseRoutes);
 app.use('/api/goals', goalRoutes);
 app.use('/api/workout-plans', workoutPlanRoutes);
+app.use('/api/mock-plans', mockDataRoutes);
 app.use('/api/progress', progressRoutes);
+
 
 
 // Initial Message Output on server
