@@ -1,11 +1,431 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Poppins, sans-serif;
+  background-color: var(--light-gray);
+  color: var(--dark-gray);
+}
+/* AppLayout.css */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the layout takes at least the full viewport height */
+  background-color: #f8f9fa; /* Light background for the app */
+}
+
+.main-content {
+  flex: 1; /* Allow the main content to take up remaining space */
+  padding-top: 80px; /* Add padding to account for the fixed header */
+  background-color: #ffffff; /* White background for the main content */
+}
+
+.container-fluid {
+  max-width: 1200px; /* Limit the width of the content for better readability */
+  margin: 0 auto; /* Center the content */
+  padding: 20px; /* Add padding for spacing */
+}
+
+/* Header Styling (if needed) */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Ensure the header is above other content */
+  background-color: #ffffff; /* White background for the header */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 60px; /* Reduce padding for smaller screens */
   }
-  
-  body {
-    font-family: Poppins, sans-serif;
-    background-color: var(--light-gray);
-    color: var(--dark-gray);
+
+  .container-fluid {
+    padding: 15px; /* Reduce padding for smaller screens */
   }
+}
+
+@media (max-width: 576px) {
+  .main-content {
+    padding-top: 50px;
+  }
+
+  .container-fluid {
+    padding: 10px;
+  }
+}
+/* Header styles */
+/* landing */
+/* LandingPage.css */
+
+/* Background Video Styling */
+.video-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.background-video {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Dim overlay for contrast */
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  height: calc(100vh - 80px); /* Account for footer height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+.brand-name {
+  color: #00d1b2; /* Highlight color for the brand name */
+}
+
+.hero-buttons .btn-primary {
+  background-color: #00d1b2;
+  border-color: #00d1b2;
+}
+
+.hero-buttons .btn-primary:hover {
+  background-color: #00b29a;
+  border-color: #00b29a;
+}
+
+/* Footer Styling */
+.footer {
+  background-color: #1c1e22;
+  color: #ffffff;
+}
+
+.footer h5 {
+  color: #00d1b2;
+}
+
+.footer a {
+  color: #b3b3b3;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #00d1b2;
+}
+/* Login.css */
+.login-container {
+  background: linear-gradient(
+    135deg,
+    #667eea,
+    #764ba2
+  ); /* Gradient background */
+  animation: gradientAnimation 10s ease infinite;
+  font-family: "Poppins", sans-serif; /* Modern font */
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.login-card {
+  background: rgba(255, 255, 255, 0.1); /* Glassmorphism effect */
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.login-card h2 {
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.tagline {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group-text {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.form-control:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  box-shadow: none;
+  color: #fff;
+}
+
+.alert {
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.login-button {
+  background: #007bff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.login-button:hover {
+  background: #0056b3;
+}
+
+.forgot-password {
+  color: #007bff;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.social-login .btn-social {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.social-login .btn-social:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.signup-link {
+  color: #007bff;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.signup-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+/* Register.css */
+.register-container {
+  background: linear-gradient(
+    135deg,
+    #667eea,
+    #764ba2
+  ); /* Gradient background */
+  animation: gradientAnimation 10s ease infinite;
+  font-family: "Poppins", sans-serif; /* Modern font */
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.register-card {
+  background: rgba(255, 255, 255, 0.1); /* Glassmorphism effect */
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.register-card h2 {
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.tagline {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group-text {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.form-control:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  box-shadow: none;
+  color: #fff;
+}
+
+.alert {
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.register-button {
+  background: #007bff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.register-button:hover {
+  background: #0056b3;
+}
+
+.social-login .btn-social {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.social-login .btn-social:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.login-link {
+  color: #007bff;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.login-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+/* Goals.css */
+.goals-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.goal-card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.goal-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.progress-bar {
+  background-color: #4f46e5; /* Vibrant purple */
+}
+
+.btn-primary {
+  background-color: #4f46e5;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #4338ca;
+}
+
+.btn-danger {
+  background-color: #ef4444;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+}
