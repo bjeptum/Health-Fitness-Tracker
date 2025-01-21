@@ -12,34 +12,26 @@ exports.getProgressData = async (req, res) => {
     const progress = [
       ...exercises.map(exercise => ({
         type: 'exercise',
-        date: exercise.date.toISOString().split('T')[0],
-        sets: exercise.sets,
-        reps: exercise.reps,
-        weight: exercise.weight || 0,
-        exercise: exercise.name,
+        name: exercise.name,
+        progress: null,
+        date: exercise.date,
       })),
-      ...workoutPlans.map(plan => ({
+      ...workoutPlans.map(workoutPlan => ({
         type: 'workoutPlan',
-        date: plan.date.toISOString().split('T')[0],
-        plan: plan.name,
-        details: plan.details,
-        imageUrl: plan.imageUrl,
-        workouts: plan.workouts.map(workout => ({
-          name: workout.name,
-          description: workout.description,
-          duration: workout.duration,
-        })),
+        name: workoutPlans.name,
+        progress: workoutPlan.workouts?.length || 0,
+        description: workoutPlan.description,
       })),
 
       ...goals.map(goal => ({
         type: 'goal',
-        targetDate: goal.targetDate.toISOString().split('T')[0],
+        name: goal.goalType,
+        progress: goal.progress || (goal.currentValue / goal.targetValue) * 100,
         description: goal.description,
-        targetValue: goal.targetValue,
       })),
     ];
-
-    res.json({ user: req.user.name, progress });
+    
+    res.status(200).json(progress)
   } catch (error) {
     console.error('Error fetching progress data:', error);
     res.status(500).json({ message: 'Server error fetching progress data' });
