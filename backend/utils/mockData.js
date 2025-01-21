@@ -2,7 +2,6 @@ const mockWorkoutPlans = [
     {
         name: 'Cardio Workout',
         description: 'A high-intensity cardio workout',
-        imageUrl: 'https://xyz.jpg',
         workouts: [
             { name: 'Jumping Jacks', description: 'Start with 3 sets of 20 reps', duration: 5 },
             { name: 'Running', description: 'Run for 30 minutes at a moderate pace', duration: 30 },
@@ -15,7 +14,6 @@ const mockWorkoutPlans = [
     {
         name: 'Strength Training',
         description: 'Build muscle and strength with this workout',
-        imageUrl: 'https://www.jpg',
         workouts: [
             { name: 'Squats', description: 'Start with 3 sets of 10 reps', duration: 15 },
             { name: 'Push-ups', description: 'Start with 3 sets of 15 reps', duration: 10 },
@@ -28,7 +26,6 @@ const mockWorkoutPlans = [
     {
         name: 'Yoga Routine',
         description: 'Yoga poses to improve flexibility',
-        imageUrl: 'https://zzz.jpg',
         workouts: [
             { name: 'Sun Salutation', description: 'Perform 5 rounds of Sun Salutation', duration: 15 },
             { name: 'Warrior Pose', description: 'Hold Warrior Pose for 1 minute on each side', duration: 10 },
@@ -40,7 +37,6 @@ const mockWorkoutPlans = [
     {
         name: 'Core Strengthening',
         description: 'Focus on strengthening the core muscles',
-        imageUrl: 'https://ghghh.jpg',
         workouts: [
             { name: 'Plank', description: 'Hold plank position for 1 minute', duration: 10 },
             { name: 'Russian Twists', description: 'Perform 3 sets of 20 reps', duration: 10 },
@@ -52,7 +48,6 @@ const mockWorkoutPlans = [
     {
         name: 'Pilates Routine',
         description: 'Pilates exercises for strength and flexibility',
-        imageUrl: 'https://yyht.jpg',
         workouts: [
             { name: 'Hundred', description: 'Perform 100 pumps of the arms while holding a V-sit', duration: 10 },
             { name: 'Roll-Up', description: 'Perform 3 sets of 10 reps', duration: 15 },
@@ -64,7 +59,6 @@ const mockWorkoutPlans = [
     {
         name: 'Full Body Circuit',
         description: 'Workout targeting all major muscle groups',
-        imageUrl: 'https://nhnb.jpg',
         workouts: [
             { name: 'Burpees', description: 'Perform 3 sets of 10 reps', duration: 15 },
             { name: 'Mountain Climbers', description: 'Perform 3 sets of 20 reps', duration: 10 },
