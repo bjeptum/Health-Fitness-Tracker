@@ -41,8 +41,8 @@ const Home = () => {
       try {
         const headers = { Authorization: `Bearer ${token}` };
         const [goalsResponse, exerciseResponse] = await Promise.all([
-          axios.get("http://localhost:8000/api/goals", { headers }),
-          axios.get("http://localhost:8000/api/exercise", { headers }),
+          axios.get(`${process.env.REACT_APP_API_URL}/api/goals`, { headers }),
+          axios.get(`${process.env.REACT_APP_API_URL}/api/exercise`, { headers }),
         ]);
         setExercises(exerciseResponse.data);
         setGoals(goalsResponse.data);

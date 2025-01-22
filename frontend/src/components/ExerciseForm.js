@@ -15,7 +15,7 @@ function ExerciseForm() {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            await axios.post('http://localhost:8000/api/exercise', exerciseData, {
+            await axios.post(`${process.env.REACT_APP_API_URL}/api/exercise`, exerciseData, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             alert('Exercise added successfully!');

@@ -30,10 +30,10 @@ const ProfilePage = () => {
       try {
         const token = localStorage.getItem("token");
         const [userResponse, progressResponse] = await Promise.all([
-          axios.get("http://localhost:8000/api/auth/profile", {
+          axios.get(`${process.env.REACT_APP_API_URL}/api/auth/profile`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get("http://localhost:8000/api/progress", {
+          axios.get(`${process.env.REACT_APP_API_URL}/api/progress`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);

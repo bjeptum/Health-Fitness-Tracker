@@ -20,7 +20,7 @@ import React, {
         return;
       }
   
-      axios.get(`http://localhost:5000/api/workout-plans`)
+      axios.get(`${process.env.REACT_APP_API_URL}/api/workout-plans`)
         .then(response => {
           const plan = response.data.find(plan => plan.id === parseInt(id));
   

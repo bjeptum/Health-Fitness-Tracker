@@ -10,7 +10,7 @@ function ScheduleWorkout() {
   const handleSchedule = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:8000/api/workout-plans/${id}/schedule`,
+      await axios.put(`${process.env.REACT_APP_API_URL}/api/workout-plans/${id}/schedule`,
         { scheduledDateTime },
         { headers: { Authorization: `Bearer ${token}` } }
       );

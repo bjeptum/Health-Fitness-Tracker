@@ -22,7 +22,7 @@ const ExerciseTracker = () => {
   const fetchExercises = async () => {
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.get("http://localhost:8000/api/exercise", {
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/exercise`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       //   const data = await response.json();
@@ -35,8 +35,8 @@ const ExerciseTracker = () => {
     e.preventDefault();
     try {
       const url = editMode
-        ? `http://localhost:8000/api/exercise/${editId}`
-        : "http://localhost:8000/api/exercise";
+        ? `${process.env.REACT_APP_API_URL}/api/exercise/${editId}`
+        : `${process.env.REACT_APP_API_URL}/api/exercise`;
       const method = editMode ? "put" : "post";
 
       await axios({
@@ -58,7 +58,7 @@ const ExerciseTracker = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/api/exercise/${id}`, {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/exercise/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       await fetchExercises();

@@ -14,7 +14,7 @@ function WorkoutPage() {
       try {
         const token = localStorage.getItem("token");
         const { data } = await axios.get(
-          `http://localhost:8000/api/workout-plans/${id}`,
+          `${process.env.REACT_APP_API_URL}/api/workout-plans/${id}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

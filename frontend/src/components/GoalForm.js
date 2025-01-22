@@ -9,7 +9,7 @@ function GoalForm() {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            await axios.post('http://localhost:8000/api/goals', goalData, {
+            await axios.post(`${process.env.REACT_APP_API_URL}/api/goals`, goalData, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             alert('Goal added successfully!');

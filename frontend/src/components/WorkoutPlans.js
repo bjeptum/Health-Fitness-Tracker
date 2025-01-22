@@ -76,7 +76,7 @@ const WorkoutPlans = () => {
     try {
       const token = localStorage.getItem("token");
       const { data } = await axios.get(
-        "http://localhost:8000/api/workout-plans",
+        `${process.env.REACT_APP_API_URL}/api/workout-plans`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -89,7 +89,7 @@ const WorkoutPlans = () => {
   const fetchMorkPlans = async () => {
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.get("http://localhost:8000/api/mock-plans");
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/mock-plans`);
       setMockWorkoutsPlan(data);
     } catch (error) {
       console.error("Error fetching workout plans:", error);
@@ -100,8 +100,8 @@ const WorkoutPlans = () => {
     e.preventDefault();
     try {
       const url = selectedPlan
-        ? `http://localhost:8000/api/workout-plans/${selectedPlan._id}`
-        : "http://localhost:8000/api/workout-plans";
+        ? `${process.env.REACT_APP_API_URL}/api/workout-plans/${selectedPlan._id}`
+        : `${process.env.REACT_APP_API_URL}/api/workout-plans`;
       const method = selectedPlan ? "PUT" : "POST";
 
       const response = await fetch(url, {
@@ -125,7 +125,7 @@ const WorkoutPlans = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this workout plan?")) {
       try {
-        await fetch(`http://localhost:8000/api/workout-plans/${id}`, {
+        await fetch(`${process.env.REACT_APP_API_URL}/api/workout-plans/${id}`, {
           method: "DELETE",
         });
         fetchWorkoutPlans();
