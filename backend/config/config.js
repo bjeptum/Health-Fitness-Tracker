@@ -17,6 +17,14 @@ const config = {
         secret: process.env.JWT_SECRET,
         expiresIn: process.env.JWT_EXPIRES_IN || '1h',
     },
+
+    frontend: {
+        url: process.env.FRONTEND_URL || 'http://localhost:3000',
+    },
+
+    api: {
+        url: process.env.BACKEND_URL || 'http://localhost:8000',
+    },
 };
 
 module.exports = config;
