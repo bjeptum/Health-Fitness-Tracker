@@ -1,10 +1,25 @@
 //Workout Plans related CRUD
 const WorkoutPlan = require('../models/workoutPlan');
+const mockWorkoutPlans = require('../utils/mockData');
+
 
 exports.createWorkoutPlan = async (req, res) => {
   try {
-    const { name, description, workouts } = req.body;
-    const workoutPlan = new WorkoutPlan({ name, description, workouts });
+    const { name, description, workouts, useMockData } = req.body;
+
+    let workoutPlanData;
+
+    if (useMockData) {
+      const randomPlan = mockWorkoutPlans[Math.floor(Math.random() * mockWorkoutPlans.length)];
+      workoutPlanData = { 
+        name: randomPlan.name, 
+        description: randomPlan.description, 
+        workouts: randomPlan.workouts 
+      };
+    } else if (workouts && workouts.length > 0) {
+      workoutPlanData = { name, description, workouts };
+    }
+    const workoutPlan = new WorkoutPlan({ workoutPlanData});
     const savedPlan = await workoutPlan.save();
     res.status(201).json(savedPlan);
   } catch (error) {
