@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Modal, Button, ProgressBar, Card, Form, Alert } from "react-bootstrap";
-import { PlusCircle, Pencil, Trash, CheckCircle } from "react-bootstrap-icons";
+import { format } from "date-fns";
 
-function Goals() {
+const Goals = () => {
   const [goals, setGoals] = useState([]);
-  const [goalData, setGoalData] = useState({
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
     goalType: "",
-    targetValue: 0,
-    currentValue: 0,
+    targetValue: "",
+    currentValue: "",
     deadline: "",
   });
-  const [error, setError] = useState("");
-  const [showModal, setShowModal] = useState(false);
-  const [editGoalId, setEditGoalId] = useState(null);
-  const [deleteGoalId, setDeleteGoalId] = useState(null);
+  const [editingId, setEditingId] = useState(null);
+
+  const api = axios.create({
+    baseURL: "http://localhost:8000/api/",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
   useEffect(() => {
     fetchGoals();
@@ -22,216 +29,244 @@ function Goals() {
 
   const fetchGoals = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const { data } = await axios.get("http://localhost:8000/api/goals", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setGoals(data);
+      setLoading(true);
+      const response = await api.get("/goals");
+      setGoals(response.data);
+      setError(null);
     } catch (err) {
-      setError("Failed to fetch goals.");
+      setError("Failed to fetch goals. Please try again later.");
+      console.error("Error fetching goals:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleCreateOrUpdateGoal = async () => {
-    if (!goalData.goalType || goalData.targetValue <= 0 || !goalData.deadline) {
-      alert("Please fill all fields correctly!");
-      return;
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const token = localStorage.getItem("token");
-      if (editGoalId) {
-        await axios.put(
-          `http://localhost:8000/api/goals/${editGoalId}`,
-          goalData,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+      if (editingId) {
+        await api.put(`/goals/${editingId}`, formData);
       } else {
-        await axios.post("http://localhost:8000/api/goals", goalData, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await api.post("/goals", formData);
       }
-      setGoalData({
-        goalType: "",
-        targetValue: 0,
-        currentValue: 0,
-        deadline: "",
-      });
-      setEditGoalId(null);
-      setShowModal(false);
       fetchGoals();
+      resetForm();
     } catch (err) {
-      setError("Failed to save goal.");
+      setError("Failed to save goal. Please check your input and try again.");
+      console.error("Error saving goal:", err);
     }
   };
 
-  const handleDeleteGoal = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:8000/api/goals/${deleteGoalId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setDeleteGoalId(null);
-      fetchGoals();
-    } catch (err) {
-      setError("Failed to delete goal.");
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this goal?")) {
+      try {
+        await api.delete(`/goals/${id}`);
+        fetchGoals();
+      } catch (err) {
+        setError("Failed to delete goal. Please try again later.");
+        console.error("Error deleting goal:", err);
+      }
     }
   };
 
-  const handleEditClick = (goal) => {
-    setGoalData({
+  const handleEdit = (goal) => {
+    setFormData({
       goalType: goal.goalType,
       targetValue: goal.targetValue,
       currentValue: goal.currentValue,
-      deadline: goal.deadline,
+      deadline: format(new Date(goal.deadline), "yyyy-MM-dd"),
     });
-    setEditGoalId(goal._id);
-    setShowModal(true);
+    setEditingId(goal._id);
+    setShowForm(true);
   };
 
-  return (
-    <div className="goals-container">
-      <h2 className="text-center mb-4">Your Goals</h2>
-      {error && <Alert variant="danger">{error}</Alert>}
+  const resetForm = () => {
+    setFormData({
+      goalType: "",
+      targetValue: "",
+      currentValue: "",
+      deadline: "",
+    });
+    setEditingId(null);
+    setShowForm(false);
+  };
 
-      {/* Add Goal Button */}
-      <div className="text-center mb-4">
-        <Button variant="primary" onClick={() => setShowModal(true)}>
-          <PlusCircle size={20} className="me-2" />
-          Add New Goal
-        </Button>
+  const calculateProgress = (current, target) => {
+    return Math.min(Math.round((current / target) * 100), 100);
+  };
+
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center p-5">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container py-4">
+      <div className="row mb-4">
+        <div className="col">
+          <div className="d-flex justify-content-between align-items-center">
+            <h1 className="mb-0">My Goals</h1>
+            <button
+              className="btn btn-primary"
+              onClick={() => setShowForm(!showForm)}
+            >
+              {showForm ? "Cancel" : "Add New Goal"}
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* Goals List */}
-      <div className="row">
-        {goals.map((goal) => (
-          <div key={goal._id} className="col-md-6 col-lg-4 mb-4">
-            <Card className="goal-card">
-              <Card.Body>
-                <Card.Title className="d-flex justify-content-between align-items-center">
-                  {goal.goalType}
-                  <div>
-                    <Button
-                      variant="link"
-                      onClick={() => handleEditClick(goal)}
-                    >
-                      <Pencil size={18} />
-                    </Button>
-                    <Button
-                      variant="link"
-                      onClick={() => setDeleteGoalId(goal._id)}
-                    >
-                      <Trash size={18} />
-                    </Button>
+      {error && (
+        <div className="alert alert-danger" role="alert">
+          {error}
+        </div>
+      )}
+
+      {showForm && (
+        <div className="row mb-4">
+          <div className="col-12 col-md-8 col-lg-6 mx-auto">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title mb-3">
+                  {editingId ? "Edit Goal" : "Create New Goal"}
+                </h5>
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label className="form-label">Goal Type</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={formData.goalType}
+                      onChange={(e) =>
+                        setFormData({ ...formData, goalType: e.target.value })
+                      }
+                      required
+                    />
                   </div>
-                </Card.Title>
-                <Card.Text>
-                  <strong>Target:</strong> {goal.targetValue}
-                  <br />
-                  <strong>Progress:</strong> {goal.currentValue} /{" "}
-                  {goal.targetValue}
-                  <ProgressBar
-                    now={(goal.currentValue / goal.targetValue) * 100}
-                    label={`${Math.round(
-                      (goal.currentValue / goal.targetValue) * 100
-                    )}%`}
-                    className="my-2"
-                  />
-                  <strong>Deadline:</strong>{" "}
-                  {new Date(goal.deadline).toLocaleDateString()}
-                </Card.Text>
-              </Card.Body>
-            </Card>
+                  <div className="mb-3">
+                    <label className="form-label">Target Value</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      value={formData.targetValue}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          targetValue: e.target.value,
+                        })
+                      }
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Current Value</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      value={formData.currentValue}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          currentValue: e.target.value,
+                        })
+                      }
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Deadline</label>
+                    <input
+                      type="date"
+                      className="form-control"
+                      value={formData.deadline}
+                      onChange={(e) =>
+                        setFormData({ ...formData, deadline: e.target.value })
+                      }
+                      required
+                    />
+                  </div>
+                  <div className="d-grid gap-2">
+                    <button type="submit" className="btn btn-success">
+                      {editingId ? "Update Goal" : "Create Goal"}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {goals.map((goal) => (
+          <div key={goal._id} className="col">
+            <div className="card h-100">
+              <div className="card-body">
+                <h5 className="card-title">{goal.goalType}</h5>
+                <div className="progress mb-3">
+                  <div
+                    className="progress-bar"
+                    role="progressbar"
+                    style={{
+                      width: `${calculateProgress(
+                        goal.currentValue,
+                        goal.targetValue
+                      )}%`,
+                    }}
+                    aria-valuenow={calculateProgress(
+                      goal.currentValue,
+                      goal.targetValue
+                    )}
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >
+                    {calculateProgress(goal.currentValue, goal.targetValue)}%
+                  </div>
+                </div>
+                <p className="card-text">
+                  Progress: {goal.currentValue} / {goal.targetValue}
+                </p>
+                <p className="card-text">
+                  <small className="text-muted">
+                    Deadline: {goal.deadline}
+                  </small>
+                </p>
+              </div>
+              <div className="card-footer bg-transparent border-top-0">
+                <div className="d-flex justify-content-end gap-2">
+                  <button
+                    className="btn btn-outline-primary btn-sm"
+                    onClick={() => handleEdit(goal)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="btn btn-outline-danger btn-sm"
+                    onClick={() => handleDelete(goal._id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         ))}
       </div>
 
-      {/* Add/Edit Goal Modal */}
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>{editGoalId ? "Edit Goal" : "Add New Goal"}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3">
-              <Form.Label>Goal Type</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="e.g., Weight Loss, Running Distance"
-                value={goalData.goalType}
-                onChange={(e) =>
-                  setGoalData({ ...goalData, goalType: e.target.value })
-                }
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Target Value</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="e.g., 10 kg, 5 km"
-                value={goalData.targetValue}
-                onChange={(e) =>
-                  setGoalData({
-                    ...goalData,
-                    targetValue: Number(e.target.value),
-                  })
-                }
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Current Value</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="e.g., 5 kg, 2 km"
-                value={goalData.currentValue}
-                onChange={(e) =>
-                  setGoalData({
-                    ...goalData,
-                    currentValue: Number(e.target.value),
-                  })
-                }
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Deadline</Form.Label>
-              <Form.Control
-                type="date"
-                value={goalData.deadline}
-                onChange={(e) =>
-                  setGoalData({ ...goalData, deadline: e.target.value })
-                }
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleCreateOrUpdateGoal}>
-            {editGoalId ? "Update Goal" : "Add Goal"}
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      {/* Delete Confirmation Modal */}
-      <Modal show={!!deleteGoalId} onHide={() => setDeleteGoalId(null)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirm Deletion</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Are you sure you want to delete this goal?</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setDeleteGoalId(null)}>
-            Cancel
-          </Button>
-          <Button variant="danger" onClick={handleDeleteGoal}>
-            Delete
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      {goals.length === 0 && !loading && (
+        <div className="text-center py-5">
+          <p className="text-muted">
+            No goals found. Create your first goal to get started!
+          </p>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default Goals;

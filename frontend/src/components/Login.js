@@ -18,6 +18,11 @@ function Login() {
         { email, password }
       );
       localStorage.setItem("token", data.token);
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ _id: data._id, email: data.email, name: data.name })
+      );
+
       if (rememberMe) {
         localStorage.setItem("rememberMe", "true");
       }

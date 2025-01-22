@@ -10,40 +10,96 @@ body {
   color: var(--dark-gray);
 }
 /* AppLayout.css */
-.app-wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Ensure the layout takes at least the full viewport height */
-  background-color: #f8f9fa; /* Light background for the app */
+/* AppLayout.css */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.main-content {
-  flex: 1; /* Allow the main content to take up remaining space */
-  padding-top: 80px; /* Add padding to account for the fixed header */
-  background-color: #ffffff; /* White background for the main content */
+.layout-wrapper {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.layout-sidebar {
+  width: 250px; /* Adjust width as needed */
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.layout-main {
+  flex: 1;
+  margin-left: 250px; /* Should match sidebar width */
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+  padding: 20px 0;
 }
 
 .container-fluid {
-  max-width: 1200px; /* Limit the width of the content for better readability */
-  margin: 0 auto; /* Center the content */
-  padding: 20px; /* Add padding for spacing */
-}
-
-/* Header Styling (if needed) */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000; /* Ensure the header is above other content */
-  background-color: #ffffff; /* White background for the header */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+  height: 100%;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .layout-sidebar {
+    width: 200px;
+  }
+
+  .layout-main {
+    margin-left: 200px;
+  }
+}
+
+/* For very small screens, make the sidebar collapsible */
+@media (max-width: 576px) {
+  .layout-sidebar {
+    width: 0;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .layout-main {
+    margin-left: 0;
+  }
+
+  /* Add this class when sidebar should be shown */
+  .layout-wrapper.sidebar-open .layout-sidebar {
+    width: 200px;
+    transform: translateX(0);
+  }
+
+  .layout-wrapper.sidebar-open .layout-main {
+    margin-left: 200px;
+  }
+}
+/* Add these styles to your Header component */
+.header {
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* For header navigation items */
+.nav-item {
+  width: 100%;
+  padding: 10px 0;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
   .main-content {
-    padding-top: 60px; /* Reduce padding for smaller screens */
+    padding-top: 100px; /* Reduce padding for smaller screens */
   }
 
   .container-fluid {
@@ -428,4 +484,239 @@ body {
 
 .btn-danger:hover {
   background-color: #dc2626;
+}
+/* workout plan */
+/* WorkoutPlans.css */
+.workout-card {
+  transition: transform 0.2s ease-in-out;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.workout-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.workout-details {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+
+.badge {
+  font-size: 0.8rem;
+  padding: 0.4em 0.8em;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .workout-card {
+    margin-bottom: 1rem;
+  }
+}
+/* ComingSoon.css */
+.coming-soon-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: float 8s infinite linear;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(20px);
+    opacity: 0;
+  }
+}
+
+.coming-soon-content {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 3rem;
+}
+
+.logo-container {
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.text-gradient {
+  background: linear-gradient(45deg, #fff, #f0f0f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.countdown-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.countdown-item:hover {
+  transform: translateY(-5px);
+}
+
+.countdown-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.countdown-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.8;
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+}
+
+.form-control:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+  box-shadow: none;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #4a90e2, #63b3ed);
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.social-link {
+  color: #fff;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-link:hover {
+  transform: translateY(-3px);
+  color: #4a90e2;
+}
+
+@media (max-width: 768px) {
+  .coming-soon-content {
+    padding: 2rem;
+  }
+
+  .countdown-item {
+    padding: 1rem;
+  }
+
+  .countdown-number {
+    font-size: 1.8rem;
+  }
+}
+/* hearder */
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+.navbar {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.nav-link {
+  color: #4a5568 !important;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #2b6cb0 !important;
 }

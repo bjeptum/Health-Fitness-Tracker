@@ -19,6 +19,9 @@ import ScheduleWorkout from "./components/ScheduleWorkout";
 import TrackProgress from "./components/TrackProgress";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from "./layouts/Layout";
+import ComingSoon from "./components/Cooming";
+import ExerciseTracker from "./components/ExerciseTracker";
+import ProfilePage from "./components/ProfilePage";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -44,6 +47,8 @@ const App = () => {
             path="/add-exercise"
             element={token ? <ExerciseForm /> : <Navigate to="/login" />}
           />
+          <Route path="/settings" element={<ComingSoon />} />
+          <Route path="/nutrition" element={<ComingSoon />} />
           <Route
             path="/add-goal"
             element={token ? <GoalForm /> : <Navigate to="/login" />}
@@ -55,6 +60,8 @@ const App = () => {
             element={<ScheduleWorkout />}
           />
           <Route path="/progress" element={<TrackProgress />} />
+          <Route path="/exercise" element={<ExerciseTracker />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
       </Routes>
     </Router>

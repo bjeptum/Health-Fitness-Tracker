@@ -23,7 +23,7 @@ function Register() {
     e.preventDefault();
     try {
       await axios.post("http://localhost:8000/api/auth/register", formData);
-      navigate("/login"); // Redirect to Login after successful registration
+      navigate("/login");
     } catch (err) {
       setError("Registration failed. Try again.");
     }
