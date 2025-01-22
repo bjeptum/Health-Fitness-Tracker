@@ -7,6 +7,7 @@ const {
   updateWorkoutPlan,
   deleteWorkoutPlan,
   scheduleWorkout,
+  getWorkoutPlanById,
 } = require('../controllers/workoutPlanController');
 
 const router = express.Router();
@@ -16,6 +17,7 @@ router.route('/')
   .get(protect, getWorkoutPlans);
 
 router.route('/:id')
+  .get(protect, getWorkoutPlanById)
   .put(protect, updateWorkoutPlan)
   .delete(protect, deleteWorkoutPlan);
 

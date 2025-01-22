@@ -23,11 +23,11 @@ const exerciseValidationSchema = Joi.object({
     'string.empty': 'Exercise name cannot be empty',
   }),
   type: Joi.string()
-    .valid('strength', 'cardio', 'aerobics', 'flexibility')
+    .valid('strength', 'cardio', 'aerobics', 'flexibility', 'yoga', 'pilates', 'full body')
     .required()
     .messages({
       'any.required': 'Exercise type is required',
-      'any.only': 'Exercise type must be one of strength, cardio, aerobics, flexibility',
+      'any.only': 'Exercise type must be one of strength, cardio, aerobics, flexibility, yoga, pilates, full body',
     }),
   sets: Joi.number().integer().positive().required().messages({
     'any.required': 'Number of sets is required',

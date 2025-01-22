@@ -64,3 +64,18 @@ exports.scheduleWorkout = async (req, res) => {
     res.status(500).json({ message: 'Error scheduling workout', error });
   }
 };
+
+exports.getWorkoutPlanById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const workoutPlan = await WorkoutPlan.findById(id);
+
+    if (!workoutPlan) {
+      return res.status(404).json({ message: "Workout plan not found" });
+    }
+
+    res.json(workoutPlan);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching workout plan", error });
+  }
+};

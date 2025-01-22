@@ -12,7 +12,7 @@ exports.createGoal = async (req, res) => {
             return res.status(400).json({ message: 'Validation failed', details: error.details });
         }
 
-        const { goalType, targetValue, currentValue, deadline } = req.body;
+        const { goalType, targetValue, currentValue, deadline, user} = req.body;
 
         const goal = new Goal({
             user: req.user._id,
