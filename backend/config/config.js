@@ -4,26 +4,26 @@ require('dotenv').config();
 const config = {
     // Application settings
     app: {
-        port: process.env.PORT || 8000,
-        env: process.env.NODE_ENV || 'development',
+        port: process.env.PORT,
+        env: process.env.NODE_ENV,
     },
 
     db: {
-        uri: process.env.MONGO_URI || 'mongodb://localhost:27017/fitness-tracker',
+        uri: process.env.MONGO_URI,
     },
 
     // JWT settings
     jwt: {
         secret: process.env.JWT_SECRET,
-        expiresIn: process.env.JWT_EXPIRES_IN || '1h',
+        expiresIn: process.env.JWT_EXPIRES_IN,
     },
 
     frontend: {
-        url: process.env.FRONTEND_URL || 'http://localhost:3000',
+        url: process.env.FRONTEND_URL,
     },
 
     api: {
-        url: process.env.BACKEND_URL || 'http://localhost:8000',
+        url: process.env.BACKEND_URL,
     },
 };
 
