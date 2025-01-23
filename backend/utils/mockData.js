@@ -2,7 +2,7 @@ const mockWorkoutPlans = [
     {
         name: 'Cardio Blast',
         description: 'Get your heart racing with this full-body burn!',
-        exercises: [
+        workouts: [
           { name: 'Jumping Jacks', description: '3 sets of 20. Let’s get that blood pumping!', duration: 5 },
           { name: 'Jogging', description: 'Run at a comfy pace for 30 minutes and feel the burn!', duration: 30 },
           { name: 'Cycling', description: 'Pedal away for 45 minutes—steady and strong!', duration: 45 },
@@ -14,7 +14,7 @@ const mockWorkoutPlans = [
       {
         name: 'Muscle Strength Training',
         description: 'Time to build those muscles and feel unstoppable!',
-        exercises: [
+        workouts: [
           { name: 'Squats', description: '3 sets of 10. Feel the burn in those legs!', duration: 15 },
           { name: 'Push-ups', description: '3 sets of 15. Let’s power up those arms and chest!', duration: 10 },
           { name: 'Pull-ups', description: '3 sets of 8. Show off your upper body strength!', duration: 20 },
@@ -26,7 +26,7 @@ const mockWorkoutPlans = [
       {
         name: 'Flexibility Yoga',
         description: 'Stretch it out and feel zen with this yoga flow.',
-        exercises: [
+        workouts: [
           { name: 'Sun Salutation', description: '5 rounds to greet the day with energy!', duration: 15 },
           { name: 'Warrior Pose', description: 'Hold for 1 minute each side. Feel like a warrior!', duration: 10 },
           { name: 'Downward Dog', description: 'Hold for 1 minute and stretch it out!', duration: 5 },
@@ -37,7 +37,7 @@ const mockWorkoutPlans = [
       {
         name: 'Core Focus',
         description: 'Tighten up your core with these powerful moves!',
-        exercises: [
+        workouts: [
           { name: 'Plank', description: 'Hold for 1 minute. Brace your core like a pro!', duration: 10 },
           { name: 'Russian Twists', description: '3 sets of 20 twists. Work that waist!', duration: 10 },
           { name: 'Leg Lifts', description: '3 sets of 15. Lift those legs to the sky!', duration: 15 },
@@ -48,7 +48,7 @@ const mockWorkoutPlans = [
       {
         name: 'Pilates Strength',
         description: 'Build strength, flexibility, and control with Pilates.',
-        exercises: [
+        workouts: [
           { name: 'Hundred', description: '100 pumps—hold that V-sit and feel the burn!', duration: 10 },
           { name: 'Roll-Up', description: '3 sets of 10. Roll and rise with control!', duration: 15 },
           { name: 'Single Leg Stretch', description: '3 sets of 10 per leg. Stretch it out and engage your core!', duration: 15 },
@@ -59,7 +59,7 @@ const mockWorkoutPlans = [
       {
         name: 'Total Body Circuit',
         description: 'A full-body workout that targets everything, no muscle left behind!',
-        exercises: [
+        workouts: [
           { name: 'Burpees', description: '3 sets of 10. Jump, squat, and push—get moving!', duration: 15 },
           { name: 'Mountain Climbers', description: '3 sets of 20. Climb your way to the top!', duration: 10 },
           { name: 'Dumbbell Lunges', description: '3 sets of 10 per leg. Lunge for strength and balance!', duration: 15 },
