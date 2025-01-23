@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 const Layout = () => {
   return (
@@ -11,6 +12,7 @@ const Layout = () => {
       <div className="layout-main">
         <div className="container-fluid px-4">
           <Outlet />
+          <SpeedInsights />
         </div>
       </div>
     </div>
