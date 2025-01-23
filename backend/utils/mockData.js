@@ -1,72 +1,72 @@
 const mockWorkoutPlans = [
     {
-        name: 'Cardio Workout',
-        description: 'A high-intensity cardio workout',
-        workouts: [
-            { name: 'Jumping Jacks', description: 'Start with 3 sets of 20 reps', duration: 5 },
-            { name: 'Running', description: 'Run for 30 minutes at a moderate pace', duration: 30 },
-            { name: 'Cycling', description: 'Cycle for 45 minutes at a steady pace', duration: 45 },
-            { name: 'Jump Rope', description: 'Jump rope for 15 minutes with intervals', duration: 15 },
-            { name: 'Swimming', description: 'Swim for 1 hour focusing on different strokes', duration: 60 },
-            { name: 'HIIT', description: 'High-Intensity Interval Training for 20 minutes', duration: 20 },
+        name: 'Cardio Blast',
+        description: 'Get your heart racing with this full-body burn!',
+        exercises: [
+          { name: 'Jumping Jacks', description: '3 sets of 20. Let’s get that blood pumping!', duration: 5 },
+          { name: 'Jogging', description: 'Run at a comfy pace for 30 minutes and feel the burn!', duration: 30 },
+          { name: 'Cycling', description: 'Pedal away for 45 minutes—steady and strong!', duration: 45 },
+          { name: 'Rope Skipping', description: 'Jump rope for 15 minutes, mix it up with intervals!', duration: 15 },
+          { name: 'Swimming', description: 'Swim for 1 hour, switch up your strokes for a full-body workout!', duration: 60 },
+          { name: 'HIIT', description: '20 minutes of explosive intervals to torch those calories!', duration: 20 },
         ],
-    },
-    {
-        name: 'Strength Training',
-        description: 'Build muscle and strength with this workout',
-        workouts: [
-            { name: 'Squats', description: 'Start with 3 sets of 10 reps', duration: 15 },
-            { name: 'Push-ups', description: 'Start with 3 sets of 15 reps', duration: 10 },
-            { name: 'Pull-ups', description: 'Do 3 sets of 8 pull-ups', duration: 20 },
-            { name: 'Deadlifts', description: 'Start with 3 sets of 5 reps', duration: 25 },
-            { name: 'Bench Press', description: 'Do 3 sets of 12 reps', duration: 20 },
-            { name: 'Dumbbell Rows', description: 'Do 3 sets of 10 reps on each arm', duration: 15 },
+      },
+      {
+        name: 'Muscle Strength Training',
+        description: 'Time to build those muscles and feel unstoppable!',
+        exercises: [
+          { name: 'Squats', description: '3 sets of 10. Feel the burn in those legs!', duration: 15 },
+          { name: 'Push-ups', description: '3 sets of 15. Let’s power up those arms and chest!', duration: 10 },
+          { name: 'Pull-ups', description: '3 sets of 8. Show off your upper body strength!', duration: 20 },
+          { name: 'Deadlifts', description: '3 sets of 5. Lift heavy, feel strong!', duration: 25 },
+          { name: 'Bench Press', description: '3 sets of 12. Push it to the limit and feel the power!', duration: 20 },
+          { name: 'Dumbbell Rows', description: '3 sets of 10 per arm. Row like a champ!', duration: 15 },
         ],
-    },
-    {
-        name: 'Yoga Routine',
-        description: 'Yoga poses to improve flexibility',
-        workouts: [
-            { name: 'Sun Salutation', description: 'Perform 5 rounds of Sun Salutation', duration: 15 },
-            { name: 'Warrior Pose', description: 'Hold Warrior Pose for 1 minute on each side', duration: 10 },
-            { name: 'Downward-Facing Dog', description: 'Hold Downward-Facing Dog for 1 minute', duration: 5 },
-            { name: 'Tree Pose', description: 'Hold Tree Pose for 30 seconds on each side', duration: 10 },
-            { name: 'Child\'s Pose', description: 'Relax in Child\'s Pose for 3 minutes', duration: 20 },
+      },
+      {
+        name: 'Flexibility Yoga',
+        description: 'Stretch it out and feel zen with this yoga flow.',
+        exercises: [
+          { name: 'Sun Salutation', description: '5 rounds to greet the day with energy!', duration: 15 },
+          { name: 'Warrior Pose', description: 'Hold for 1 minute each side. Feel like a warrior!', duration: 10 },
+          { name: 'Downward Dog', description: 'Hold for 1 minute and stretch it out!', duration: 5 },
+          { name: 'Tree Pose', description: 'Balance it out—30 seconds per side. Stay grounded!', duration: 10 },
+          { name: 'Child’s Pose', description: 'Chill in Child’s Pose for 3 minutes. Relax and breathe.', duration: 20 },
         ],
-    },
-    {
-        name: 'Core Strengthening',
-        description: 'Focus on strengthening the core muscles',
-        workouts: [
-            { name: 'Plank', description: 'Hold plank position for 1 minute', duration: 10 },
-            { name: 'Russian Twists', description: 'Perform 3 sets of 20 reps', duration: 10 },
-            { name: 'Leg Raises', description: 'Perform 3 sets of 15 reps', duration: 15 },
-            { name: 'Crunches', description: 'Perform 3 sets of 20 reps', duration: 10 },
-            { name: 'Bicycle Crunches', description: 'Perform 3 sets of 20 reps', duration: 15 },
+      },
+      {
+        name: 'Core Focus',
+        description: 'Tighten up your core with these powerful moves!',
+        exercises: [
+          { name: 'Plank', description: 'Hold for 1 minute. Brace your core like a pro!', duration: 10 },
+          { name: 'Russian Twists', description: '3 sets of 20 twists. Work that waist!', duration: 10 },
+          { name: 'Leg Lifts', description: '3 sets of 15. Lift those legs to the sky!', duration: 15 },
+          { name: 'Crunches', description: '3 sets of 20. Feel the burn in those abs!', duration: 10 },
+          { name: 'Bicycle Crunches', description: '3 sets of 20. Pedal your way to a tighter core!', duration: 15 },
         ],
-    },
-    {
-        name: 'Pilates Routine',
-        description: 'Pilates exercises for strength and flexibility',
-        workouts: [
-            { name: 'Hundred', description: 'Perform 100 pumps of the arms while holding a V-sit', duration: 10 },
-            { name: 'Roll-Up', description: 'Perform 3 sets of 10 reps', duration: 15 },
-            { name: 'Single Leg Stretch', description: 'Perform 3 sets of 10 reps on each leg', duration: 15 },
-            { name: 'Swimming', description: 'Perform 3 sets of 20 reps', duration: 15 },
-            { name: 'Leg Pull Front', description: 'Perform 3 sets of 10 reps', duration: 15 },
+      },
+      {
+        name: 'Pilates Strength',
+        description: 'Build strength, flexibility, and control with Pilates.',
+        exercises: [
+          { name: 'Hundred', description: '100 pumps—hold that V-sit and feel the burn!', duration: 10 },
+          { name: 'Roll-Up', description: '3 sets of 10. Roll and rise with control!', duration: 15 },
+          { name: 'Single Leg Stretch', description: '3 sets of 10 per leg. Stretch it out and engage your core!', duration: 15 },
+          { name: 'Swimming', description: '3 sets of 20. Get into the rhythm with these swimming moves!', duration: 15 },
+          { name: 'Leg Pull Front', description: '3 sets of 10. Stretch and strengthen your legs!', duration: 15 },
         ],
-    },
-    {
-        name: 'Full Body Circuit',
-        description: 'Workout targeting all major muscle groups',
-        workouts: [
-            { name: 'Burpees', description: 'Perform 3 sets of 10 reps', duration: 15 },
-            { name: 'Mountain Climbers', description: 'Perform 3 sets of 20 reps', duration: 10 },
-            { name: 'Dumbbell Lunges', description: 'Perform 3 sets of 10 reps on each leg', duration: 15 },
-            { name: 'Push Press', description: 'Perform 3 sets of 10 reps', duration: 15 },
-            { name: 'Plank with Shoulder Taps', description: 'Hold plank position and tap shoulders for 1 minute', duration: 20 },
+      },
+      {
+        name: 'Total Body Circuit',
+        description: 'A full-body workout that targets everything, no muscle left behind!',
+        exercises: [
+          { name: 'Burpees', description: '3 sets of 10. Jump, squat, and push—get moving!', duration: 15 },
+          { name: 'Mountain Climbers', description: '3 sets of 20. Climb your way to the top!', duration: 10 },
+          { name: 'Dumbbell Lunges', description: '3 sets of 10 per leg. Lunge for strength and balance!', duration: 15 },
+          { name: 'Push Press', description: '3 sets of 10. Press those weights to the sky!', duration: 15 },
+          { name: 'Plank with Shoulder Taps', description: 'Hold and tap for 1 minute. Stay stable, tap your way to success!', duration: 20 },
         ],
-    },
+      },
 ];
 
 module.exports = mockWorkoutPlans;

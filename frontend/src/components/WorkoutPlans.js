@@ -4,43 +4,43 @@ import { useNavigate } from "react-router-dom";
 
 const mockWorkoutPlansInit = [
   {
-    name: "Cardio Workout",
-    description: "A high-intensity cardio workout",
+    name: "Cardio Blast",
+    description: "Get your heart racing with this full-body burn!",
     workouts: [
       {
         name: "Jumping Jacks",
-        description: "Start with 3 sets of 20 reps",
+        description: "3 sets of 20. Get that blood pumping!",
         duration: 5,
       },
       {
-        name: "Running",
-        description: "Run for 30 minutes at a moderate pace",
+        name: "Jogging",
+        description: "Run at a comfy pace for 30 minutes and feel the burn",
         duration: 30,
       },
       {
         name: "Cycling",
-        description: "Cycle for 45 minutes at a steady pace",
+        description: "Pedal away for 45 minutes—steady and strong!",
         duration: 45,
       },
     ],
   },
   {
-    name: "Strength Training",
-    description: "Build muscle and strength with this workout",
+    name: "Muscle Strength Training",
+    description: "Time to build those muscles and feel unstoppable",
     workouts: [
       {
         name: "Squats",
-        description: "Start with 3 sets of 10 reps",
+        description: "3 sets of 10. Feel the burn in those legs!",
         duration: 15,
       },
       {
         name: "Push-ups",
-        description: "Start with 3 sets of 15 reps",
+        description: "3 setd of 15. Let's power up those arms and chest!",
         duration: 10,
       },
       {
         name: "Pull-ups",
-        description: "Do 3 sets of 8 pull-ups",
+        description: "3 sets of 8. Show off your upper body strength",
         duration: 20,
       },
     ],
