@@ -23,10 +23,11 @@ function Login() {
         JSON.stringify({ _id: data._id, email: data.email, name: data.name })
       );
 
-      if (rememberMe) {
-        localStorage.setItem("rememberMe", "true");
-      }
       navigate("/home"); // Redirect to Home
+
+      if (rememberMe) {
+        localStorage.setItem("rememberMe", true);
+      }
     } catch (err) {
       setError("Invalid email or password");
     }
