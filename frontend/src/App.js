@@ -19,7 +19,7 @@ import ScheduleWorkout from "./components/ScheduleWorkout";
 import TrackProgress from "./components/TrackProgress";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from "./layouts/Layout";
-import ComingSoon from "./components/Cooming";
+import ComingSoon from "./components/Coming";
 import ExerciseTracker from "./components/ExerciseTracker";
 import ProfilePage from "./components/ProfilePage";
 
