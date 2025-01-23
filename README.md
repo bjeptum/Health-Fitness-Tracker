@@ -34,6 +34,8 @@ JengaFit is a reliable fitness application that enables users to stay consistent
 
 Navigate to your web browser and have fun being fit🏋️! 🌐
 
+[JengaFit](https://health-fitness-tracker-theta.vercel.app/)
+
 ### 🤝 Contribution and  👩‍💻 Team
 
 Currently, I, Jeptum Brenda, am the sole contributor.
