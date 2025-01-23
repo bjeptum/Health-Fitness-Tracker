@@ -103,7 +103,6 @@ const WorkoutPlans = () => {
         ? `${process.env.REACT_APP_API_URL}/api/workout-plans/${selectedPlan._id}`
         : `${process.env.REACT_APP_API_URL}/api/workout-plans`;
       const method = selectedPlan ? "PUT" : "POST";
-
       const response = await fetch(url, {
         method,
         headers: {
@@ -127,6 +126,10 @@ const WorkoutPlans = () => {
       try {
         await fetch(`${process.env.REACT_APP_API_URL}/api/workout-plans/${id}`, {
           method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         });
         fetchWorkoutPlans();
       } catch (error) {
@@ -396,187 +399,3 @@ const WorkoutPlans = () => {
 };
 
 export default WorkoutPlans;
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-// import { useNavigate, Link } from "react-router-dom";
-// import Header from "./Header1";
-
-// function WorkoutPlans() {
-//   const [plans, setPlans] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-//   const [newPlan, setNewPlan] = useState({
-//     name: "",
-//     description: "",
-//     workouts: [],
-//   });
-//   const [showAddForm, setShowAddForm] = useState(false);
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     fetchPlans();
-//   }, []);
-
-//   const fetchPlans = async () => {
-//     try {
-//       const token = localStorage.getItem("token");
-//       const { data } = await axios.get(
-//         "http://localhost:8000/api/workout-plans",
-//         {
-//           headers: { Authorization: `Bearer ${token}` },
-//         }
-//       );
-//       setPlans(data);
-//       setLoading(false);
-//     } catch (error) {
-//       setError("Error fetching workout plans");
-//       setLoading(false);
-//     }
-//   };
-
-//   const handleAddPlan = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const token = localStorage.getItem("token");
-//       await axios.post("http://localhost:8000/api/workout-plans", newPlan, {
-//         headers: { Authorization: `Bearer ${token}` },
-//       });
-//       fetchPlans();
-//       setShowAddForm(false);
-//       setNewPlan({ name: "", description: "", workouts: [] });
-//     } catch (error) {
-//       setError("Error adding workout plan");
-//     }
-//   };
-
-//   const handleDeletePlan = async (id) => {
-//     if (window.confirm("Are you sure you want to delete this plan?")) {
-//       try {
-//         const token = localStorage.getItem("token");
-//         await axios.delete(`http://localhost:8000/api/workout-plans/${id}`, {
-//           headers: { Authorization: `Bearer ${token}` },
-//         });
-//         fetchPlans();
-//       } catch (error) {
-//         setError("Error deleting workout plan");
-//       }
-//     }
-//   };
-
-//   if (loading) {
-//     return (
-//       <div className="container mt-5">
-//         <div className="text-center">
-//           <div className="spinner-border text-primary" role="status">
-//             <span className="visually-hidden">Loading...</span>
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <>
-//       <div className="container mt-4">
-//         <div className="row mb-4">
-//           <div className="col">
-//             <h1 className="display-4 text-primary">Workout Plans</h1>
-//             <button
-//               className="btn btn-primary"
-//               onClick={() => setShowAddForm(!showAddForm)}
-//             >
-//               {showAddForm ? "Cancel" : "Add New Plan"}
-//             </button>
-//           </div>
-//         </div>
-
-//         {error && (
-//           <div className="alert alert-danger" role="alert">
-//             {error}
-//           </div>
-//         )}
-
-//         {showAddForm && (
-//           <div className="card mb-4">
-//             <div className="card-body">
-//               <h3 className="card-title">Add New Workout Plan</h3>
-//               <form onSubmit={handleAddPlan}>
-//                 <div className="mb-3">
-//                   <label className="form-label">Name</label>
-//                   <input
-//                     type="text"
-//                     className="form-control"
-//                     value={newPlan.name}
-//                     onChange={(e) =>
-//                       setNewPlan({ ...newPlan, name: e.target.value })
-//                     }
-//                     required
-//                   />
-//                 </div>
-//                 <div className="mb-3">
-//                   <label className="form-label">Description</label>
-//                   <textarea
-//                     className="form-control"
-//                     value={newPlan.description}
-//                     onChange={(e) =>
-//                       setNewPlan({ ...newPlan, description: e.target.value })
-//                     }
-//                     required
-//                   />
-//                 </div>
-//                 <button type="submit" className="btn btn-success">
-//                   Create Plan
-//                 </button>
-//               </form>
-//             </div>
-//           </div>
-//         )}
-
-//         <div className="row">
-//           {plans.map((plan) => (
-//             <div className="col-md-6 col-lg-4 mb-4" key={plan._id}>
-//               <div className="card h-100 workout-card">
-//                 <div className="card-body">
-//                   <h5 className="card-title">{plan.name}</h5>
-//                   <p className="card-text">{plan.description}</p>
-//                   <div className="workout-details">
-//                     <h6>Workouts:</h6>
-//                     <ul className="list-unstyled">
-//                       {plan.workouts.map((workout) => (
-//                         <li key={workout._id} className="mb-2">
-//                           <strong>{workout.name}</strong>
-//                           <br />
-//                           <small>{workout.description}</small>
-//                           <br />
-//                           <span className="badge bg-info">
-//                             {workout.duration} mins
-//                           </span>
-//                         </li>
-//                       ))}
-//                     </ul>
-//                   </div>
-//                   <div className="card-actions mt-3">
-//                     <Link
-//                       to={`/workout-plans/${plan._id}`}
-//                       className="btn btn-primary btn-sm me-2"
-//                     >
-//                       View Details
-//                     </Link>
-//                     <button
-//                       onClick={() => handleDeletePlan(plan._id)}
-//                       className="btn btn-danger btn-sm"
-//                     >
-//                       Delete
-//                     </button>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
-
-// export default WorkoutPlans;

@@ -16,7 +16,7 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/login");
+    navigate("/");
   };
 
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
