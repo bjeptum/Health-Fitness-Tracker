@@ -9,13 +9,13 @@ const config = {
     },
 
     db: {
-        uri: process.env.MONGO_URI,
+        uri: process.env.MONGO_URI 
     },
 
     // JWT settings
     jwt: {
         secret: process.env.JWT_SECRET,
-        expiresIn: process.env.JWT_EXPIRES_IN,
+        expiresIn: process.env.JWT_EXPIRES_IN || "1h",
     },
 
     frontend: {
@@ -23,7 +23,7 @@ const config = {
     },
 
     api: {
-        url: process.env.BACKEND_URL,
+        url: process.env.REACT_APP_API_URL,
     },
 };
 
