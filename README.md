@@ -2,11 +2,11 @@
 
 ## 🏋️‍♂️ Health-Fitness Tracker
 
+https://health-fitness-tracker-theta.vercel.app
 
+### 🎉 About the Project
 
-### 🎉 Introduction
-
-**Jenga Fit** is a web application used to track user fitness activities with health insights and visualization of progress over time.
+**[JengaFit](https://health-fitness-tracker-theta.vercel.app/)** is a web application used to track user fitness activities with health insights and visualization of progress over time.
 
 
 ### 🌈 The Context
@@ -27,7 +27,7 @@ JengaFit is a reliable fitness application that enables users to stay consistent
 
 - 📝 Users can create an account and log in.
 - 📅 Users can log and track fitness activities.
-- 🎟️ Users can set personal fitness objectives sucha s building endurance or postpartu, recovery.
+- 🎟️ Users can create and manage workout plans  such as building endurance or postpartum recovery.
 - 👥 Users can track progress using charts and graphs to stay inspired.
 
 ## ⚙️ Installation
@@ -36,9 +36,27 @@ Navigate to your web browser and have fun being fit🏋️! 🌐
 
 [JengaFit](https://health-fitness-tracker-theta.vercel.app/)
 
+
+ ### Technologies Used
+
+#### MERN Architecture:
+
+ a) Database: MongoDB to store user profiles,logs and progress data.
+
+ b) Backend: Node.js with Express.js for or handling data securely and efficiently.
+
+ c) Frontend: React for a dynamic user interface using Bootstrap library for visual appeal.
+
+ d) Data Visualization: Chart.js for visualization of user progress in an engaging way.
+
+
+###  Proposed Improvements
+
+ Integration of machine learning models to provide personalized workouts and diet recommendations.
+
 ### 🤝 Contribution and  👩‍💻 Team
 
-Currently, I, Jeptum Brenda, am the sole contributor.
+Currently I am the sole contributor.
 
 In case you like the app or would like to collaborate in improving it, go ahead create a pull request.
 
@@ -47,13 +65,6 @@ Let's connect too to make this app awesome on:
 [LinkedIn](https://www.linkedin.com/in/brenda-jeptum-8bab79120/)
 [Twitter](https://x.com/BJeptum)
 
-### 🔗 Related Projects
-
-
-
 ### 📜 Licensing
 
 Totally free! Just give me credit for my work. 🙌
-
-
-
